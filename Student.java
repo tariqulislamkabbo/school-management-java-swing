@@ -165,10 +165,10 @@ public class Student extends JFrame implements ActionListener, MouseListener
 		
 	}
 	
-	public void addStudent(String a)
+	public void addStudent(String name, String cls, String section, int age)
 	{
 		int flag = 0;
-		st = new Student1(a);
+		st = new Student1(name, cls, section, age);
 		for(int i = 0; i<student.length;i++)
 		{
 			if(student[i] == null)
@@ -253,12 +253,22 @@ public class Student extends JFrame implements ActionListener, MouseListener
 	
 	public void actionPerformed(ActionEvent ae)
 	{
-		String s1 = tx1.getText();
+		String name = tx1.getText();
+		String cls = tx2.getText();
+		String section = tx4.getText();
+		int age = Integer.parseInt(tx7.getText());  
 		String s2 = tx3.getText();
 		String s3 = tx5.getText();
 		if(ae.getSource() == b1)
 		{
-			addStudent(s1);
+			addStudent(name, cls, section, age);
+			tx1.setText("");
+			tx2.setText("");
+			tx4.setText("");
+			tx7.setText("");
+
+
+
 		}
 		else if (ae.getSource() == b2)
 		{

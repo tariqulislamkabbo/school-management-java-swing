@@ -3,7 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import static javax.swing.JOptionPane.showMessageDialog;
-
+import java.io.*;
+import java.util.*;
 public class Login extends JFrame implements MouseListener,ActionListener
 {
 	ImageIcon img;
@@ -125,12 +126,13 @@ public Login()
 	public void actionPerformed(ActionEvent ae)
 	{
 		String command = ae.getActionCommand();
-		
+
 		if(loginBtn.getText().equals(command))
 		{
 		
 			String s1 = loginTF.getText();
 			String s2 = passWord.getText();
+			boolean isLoginSuccess = false;
 			try
 			{
 				if(s2.length()<8) 
@@ -142,21 +144,36 @@ public Login()
             {
                 showMessageDialog(null, "Password needs to be atleast 8 characters.");
             }
-			
-			if((s1.equals("Kabbo") || s1.equals("Jakaria") 
-				||s1.equals("Soham") || s1.equals("Rabbi")) && s2.equals("kabbo123"))
-			{
-			
-				//showMessageDialog(null, "valid Username and password.");
-			
+            try{
+				File file = new File("./record/user.txt");  
+				Scanner sc = new Scanner(file);
+				while(sc.hasNext())
+				{
+					String line = sc.nextLine();
+					String[] splited = line.split(" ");
+					String username = splited[0];
+					String password = splited[1];
+					if(s1.equals(username) && s2.equals(password)){
+						isLoginSuccess = true;
+						break;
+					}
+				}
+
+				sc.close();
+            }
+            catch(Exception ex){
+            	System.out.println("error: "+ ex);
+            }
+            if(isLoginSuccess){			
 				Selection sf = new Selection(s1, this);
 				sf.setVisible(true);
 				this.setVisible(false);
-			}
+            }
 			else
 			{
 				showMessageDialog(null, "Invalid Username or password!!");
 			}
+			
 		}
         else if(exitBtn.getText().equals(command))
 		{

@@ -49,7 +49,7 @@ public class Teacher extends JFrame implements ActionListener, MouseListener
 		l2.setForeground(Color.BLACK);
 		panel.add(l2);
 		
-		tx1 = new JTextField("");
+		tx1 = new JTextField();
 		tx1.setBounds(150,165,100,30);
 		panel.add(tx1);
 		
@@ -140,10 +140,10 @@ public class Teacher extends JFrame implements ActionListener, MouseListener
 		
 	}
 	
-	public void addTeacher(String a)
+	public void addTeacher(String name, String subject, String salary)
 	{
 		int flag = 0;
-		acc = new Account1(a);
+		acc = new Account1(name, subject, salary);
 		for(int i = 0; i<accounts.length;i++)
 		{
 			if(accounts[i] == null)
@@ -229,12 +229,19 @@ public class Teacher extends JFrame implements ActionListener, MouseListener
 	
 	public void actionPerformed(ActionEvent ae)
 	{
-		String s1 = tx1.getText();
+		String name = tx1.getText();
+		String subject = tx2.getText();
+		String salary = tx7.getText(); 
+		//String s1 = tx1.getText();
 		String s2 = tx3.getText();
 		String s3 = tx4.getText();
+
 		if(ae.getSource() == b1)
 		{
-			addTeacher(s1);
+			addTeacher(name, subject, salary);
+			tx1.setText("");
+			tx2.setText("");
+			tx7.setText("");
 		}
 		else if (ae.getSource() == b2)
 		{

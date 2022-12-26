@@ -11,10 +11,10 @@ public class Student1
 	private String name;
 	private String cls;
 	private String section;
-	private int age;
+	private String age;
 
 	public Student1(){}
-	public Student1(String name, String cls, String section, int age){
+	public Student1(String name, String cls, String section, String age){
 		this.name = name;
 		this.cls = cls;
 		this.section = section;
